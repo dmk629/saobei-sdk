@@ -1,0 +1,22 @@
+{
+  "name": "dmk629/saobei-sdk",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "api",
+    "sdk",
+    "saobei",
+    "pay"
+  ],
+  "description": "SDK for saobei API",
+  "require": {
+    "php": ">=5.3",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Saobei\\sdk\\": "src/"
+    }
+  }
+}

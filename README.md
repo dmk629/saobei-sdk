@@ -201,7 +201,7 @@ composer require dmk629/saobei-sdk
 ```
 ------
 
-- src/Dispatcher.php中集成所有方法，若有疑问可
+- src/Dispatcher.php中集成所有方法，若有疑问可查看相关实体类。
 
 - src/Util/HttpClient.php 为 `curl` 版简单封装的请求类，可以替换为其他客户端。
 

@@ -47,7 +47,8 @@ class Request implements RequestInterface
             ){
                 throw new SaobeiException('必填参数缺失:'.$fieldName);
             }
-            if(!in_array($fieldName, $fullFields))throw new SaobeiException('非法字段:'.$fieldName);
+            $fullFields = array_merge($fullFields, array('optionalFields', 'requiredFields'));
+            if(!empty($this->$fieldName) && !in_array($fieldName, $fullFields))throw new SaobeiException('非法字段:'.$fieldName);
         }
         $this->afterCheckParam();
     }

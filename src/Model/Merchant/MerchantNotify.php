@@ -31,7 +31,8 @@ class MerchantNotify extends Notify
      * */
     public function notify($data, $callback)
     {
-        if(SignUtil::checkSignOld(array(
+        if(SignUtil::checkSign(
+            array(
                 'return_code' => $data['return_code'],
                 'return_msg' => $data['return_msg'],
                 'trace_no' => $data['trace_no'],
@@ -39,9 +40,14 @@ class MerchantNotify extends Notify
                 'inst_no' => $data['inst_no'],
                 'merchant_no' => $data['merchant_no'],
                 'key_sign' => $data['key_sign']
-            ), array('key' => Merchant::getInstance()->getKey()), $data['key_sign']) === false
-        )$this->onFailed();
-        return $this->onSucceed($callback);
+            ),
+            array('key' => Merchant::getInstance()->getKey()),
+            $data['key_sign']
+        )
+        ){
+            return $this->onSucceed($callback);
+        }
+        return $this->onFailed();
     }
 
     /**
@@ -54,6 +60,15 @@ class MerchantNotify extends Notify
     protected function verifySign($data)
     {
         return SignUtil::checkSign($data, array('key' => Merchant::getInstance()->getKey()), $data['key_sign']);
+    }
+
+    /**
+     * 请求失败事件
+     * @throws SaobeiException
+     * */
+    protected function onFailed()
+    {
+        return $this->reply(false);
     }
 
 }

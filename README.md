@@ -79,7 +79,7 @@ composer require dmk629/saobei-sdk
          *  ["status" => true, "errmsg" => "成功"]
          *  ["status" => false, "errmsg" => "签名失败"]
          * */
-         return [];
+         return array();
     });
     
     //额外参数

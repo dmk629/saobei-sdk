@@ -8,7 +8,7 @@ class SignUtil
 {
 
     /**
-     * 生成签名（字典序非空）
+     * 生成签名（字典序）
      * @param array $info 参数
      * @param array $token 令牌数组
      * @return string
@@ -28,7 +28,7 @@ class SignUtil
     }
 
     /**
-     * 验证签名（字典序非空）
+     * 验证签名（字典序）
      * @param array $info 参数
      * @param array $token 令牌数组
      * @param string $sign 签名
@@ -43,7 +43,7 @@ class SignUtil
     }
 
     /**
-     * 生成签名（字典序必传）
+     * 生成签名（文档序）
      * @param array $info 参数
      * @param array $token 令牌数组
      * @return string
@@ -62,7 +62,7 @@ class SignUtil
     }
 
     /**
-     * 验证签名（字典序必传）
+     * 验证签名（文档序）
      * @param array $info 参数
      * @param array $token 令牌数组
      * @param string $sign 签名

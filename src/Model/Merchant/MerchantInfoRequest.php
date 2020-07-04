@@ -1,7 +1,9 @@
 <?php
 namespace Saobei\sdk\Model\Merchant;
 
+use Saobei\sdk\Config\Merchant;
 use Saobei\sdk\Exception\SaobeiException;
+use Saobei\sdk\Util\SignUtil;
 
 class MerchantInfoRequest extends MerchantRequest
 {
@@ -17,7 +19,7 @@ class MerchantInfoRequest extends MerchantRequest
         'img_license','img_merchant_person_idcard','img_idcard_a','img_idcard_b','img_bankcard_a','img_bankcard_b','img_logo','img_indoor',
         'img_contract','img_other','img_idcard_holding','img_org_code','img_tax_reg','img_unincorporated','img_private_idcard_a',
         'img_private_idcard_b','img_standard_protocol','img_val_add_protocol','img_sub_account_promiss','img_cashier','img_3rd_part',
-        'img_alicashier','img_salesman_logo','img_union_materiel','notify_url'
+        'img_alicashier','img_salesman_logo','img_union_materiel','notify_url','merchant_service_phone','img_open_permits','api_ver'
     );
 
     /**
@@ -398,7 +400,7 @@ class MerchantInfoRequest extends MerchantRequest
             'inst_no','trace_no','key_sign','merchant_no'
         );
         $param = $this->main($fields);
-        $param['api_ver'] = '200';
+        $param['api_ver'] = '201';
         return $param;
     }
 

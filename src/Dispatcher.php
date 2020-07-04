@@ -23,6 +23,8 @@ use Saobei\sdk\Model\Trade\Partner\OrderRequest as PartnerOrder;
 use Saobei\sdk\Model\Trade\Partner\UserRequest as PartnerUser;
 use Saobei\sdk\Model\Trade\Partner\PartnerNotify;
 use Saobei\sdk\Model\Merchant\MerchantInfoRequest as MerchantInfo;
+use Saobei\sdk\Model\Merchant\StoreRequest as MerchantStore;
+use Saobei\sdk\Model\Merchant\TerminalRequest as MerchantTerminal;
 use Saobei\sdk\Model\Merchant\BillRequest as Bill;
 use Saobei\sdk\Model\Merchant\WeChatConfigRequest as WeChatConfig;
 use Saobei\sdk\Model\Merchant\RateRequest as Rate;
@@ -133,11 +135,11 @@ class Dispatcher
                     break;
                 case 'notify':
                     $notify = new PrimaryNotify();
-                    $notify->notify($arguments[0], $arguments[1]);
+                    $response = $notify->notify($arguments[0], $arguments[1]);
                     break;
                 case 'ordersync':
                     $notify = new PrimaryNotify();
-                    $notify->orderSync($arguments[0], $arguments[1]);
+                    $response = $notify->orderSync($arguments[0], $arguments[1]);
                     break;
                 case 'fenqiratequery':
                     $response = $this->sendPostRequest(array(new FenQiRate(), 'query'), $arguments[0], TradeRoute::$fenqiRateQuery);
@@ -170,7 +172,7 @@ class Dispatcher
                     break;
                 case 'fenqinotify':
                     $notify = new FenQiNotify();
-                    $notify->notify($arguments[0], $arguments[1]);
+                    $response = $notify->notify($arguments[0], $arguments[1]);
                     break;
                 case 'preauthbar':
                 case 'preauthbarcode':
@@ -221,7 +223,7 @@ class Dispatcher
                     break;
                 case 'partnernotify':
                     $notify = new PartnerNotify();
-                    $notify->notify($arguments[0], $arguments[1]);
+                    $response = $notify->notify($arguments[0], $arguments[1]);
                     break;
                 case 'merchantadd':
                     $response = $this->sendPostRequest(array(new MerchantInfo(), 'add'), $arguments[0], MerchantRoute::$addMerchant, 'mch');
@@ -232,14 +234,29 @@ class Dispatcher
                 case 'merchantupdate':
                     $response = $this->sendPostRequest(array(new MerchantInfo(), 'update'), $arguments[0], MerchantRoute::$updateMerchant, 'mch');
                     break;
-                case 'merchantupquery':
+                case 'merchantquery':
                     $response = $this->sendPostRequest(array(new MerchantInfo(), 'query'), $arguments[0], MerchantRoute::$queryMerchant, 'mch');
                     break;
-                case 'merchantupquerywechatstatus':
+                case 'merchantquerywechatstatus':
                     $response = $this->sendPostRequest(array(new MerchantInfo(), 'queryWeChatStatus'), $arguments[0], MerchantRoute::$queryWxStatus, 'mch');
                     break;
                 case 'billdownload':
                     $response = $this->sendGetRequest(array(new Bill(), 'downloadPath'), $arguments[0], '', 'mch');
+                    break;
+                case 'merchantaddstore':
+                    $response = $this->sendGetRequest(array(new MerchantStore(), 'add'), $arguments[0], MerchantRoute::$addStore, 'mch');
+                    break;
+                case 'merchantupdatestore':
+                    $response = $this->sendGetRequest(array(new MerchantStore(), 'update'), $arguments[0], MerchantRoute::$updateStore, 'mch');
+                    break;
+                case 'merchantquerystore':
+                    $response = $this->sendGetRequest(array(new MerchantStore(), 'query'), $arguments[0], MerchantRoute::$queryStore, 'mch');
+                    break;
+                case 'merchantaddterminal':
+                    $response = $this->sendGetRequest(array(new MerchantTerminal(), 'downloadPath'), $arguments[0], MerchantRoute::$addTerminal, 'mch');
+                    break;
+                case 'merchantqueryterminal':
+                    $response = $this->sendGetRequest(array(new MerchantTerminal(), 'downloadPath'), $arguments[0], MerchantRoute::$queryTerminal, 'mch');
                     break;
                 case 'wechatconfigset':
                     $response = $this->sendPostRequest(array(new WechatConfig(), 'set'), $arguments[0], MerchantRoute::$setWechatConfig, 'mch');
@@ -276,11 +293,11 @@ class Dispatcher
                     break;
                 case 'merchantinfonotify':
                     $notify = new MerchantNotify();
-                    $notify->notify($arguments[0], $arguments[1]);
+                    $response = $notify->notify($arguments[0], $arguments[1]);
                     break;
                 case 'merchantupdatenotify':
                     $notify = new MerchantNotify();
-                    $notify->changeNotify($arguments[0], $arguments[1]);
+                    $response = $notify->changeNotify($arguments[0], $arguments[1]);
                     break;
                 case 'querycash':
                     $response = $this->sendPostRequest(array(new MerchantCash(), 'queryCash'), $arguments[0], MerchantRoute::$queryMerchantCash, 'mch');

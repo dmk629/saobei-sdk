@@ -151,6 +151,11 @@ composer require dmk629/saobei-sdk
 - merchantAdd       商户新增
 - merchantCheckName 商户名查重
 - merchantUpdate    商户更新
+- merchantAddStore  创建门店
+- merchantUpdateStore 修改门店
+- merchantquerystore 门店查询
+- merchantaddterminal 创建终端
+- merchantqueryterminal 查询终端
 - billDownLoad      账单下载
 - weChatConfigSet   微信配置设置
 - weChatConfigGet   微信配置查询

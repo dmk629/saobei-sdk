@@ -178,8 +178,6 @@ composer require dmk629/saobei-sdk
 - doTransfer        发起转账
 - queryTransfer     查询转账
 
------
-
 ## 目录结构
 
 ```bash
